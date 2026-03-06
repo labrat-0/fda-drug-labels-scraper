@@ -1,0 +1,119 @@
+{
+    "title": "FDA Drug Labels Scraper - Input",
+    "description": "Search FDA drug labels from openFDA. Find drug labeling information including indications, dosage, warnings, interactions, and more. No API key required.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "mode": {
+            "sectionCaption": "Scraping Mode",
+            "sectionDescription": "Select what to do: search drug labels, look up a specific label by Set ID, search by drug name, or search by manufacturer.",
+            "title": "Scraping mode",
+            "type": "string",
+            "description": "Select what to do: search labels, get a specific label by Set ID, search by drug name/ingredient, or search by manufacturer.",
+            "editor": "select",
+            "enum": ["search_labels", "get_label", "search_by_drug", "search_by_manufacturer"],
+            "enumTitles": [
+                "Search Labels (general search with filters)",
+                "Get Label (single label by Set ID)",
+                "Search by Drug (drug name or active ingredient)",
+                "Search by Manufacturer (company name)"
+            ],
+            "default": "search_labels"
+        },
+        "query": {
+            "sectionCaption": "Search Filters",
+            "sectionDescription": "Identify the drug labels you want. Provide a keyword, drug name, active ingredient, or manufacturer.",
+            "title": "Search query",
+            "type": "string",
+            "description": "General search term. Searches across all label fields.",
+            "editor": "textfield",
+            "prefill": "ibuprofen"
+        },
+        "setId": {
+            "title": "Set ID",
+            "type": "string",
+            "description": "FDA Set ID (UUID format, e.g., 'a1b2c3d4-e5f6-7890-abcd-ef1234567890'). Required for get_label mode.",
+            "editor": "textfield"
+        },
+        "drugName": {
+            "title": "Drug / Brand Name",
+            "type": "string",
+            "description": "Brand name of the drug (e.g., 'Advil', 'Lipitor', 'Humira').",
+            "editor": "textfield"
+        },
+        "activeIngredient": {
+            "title": "Active Ingredient",
+            "type": "string",
+            "description": "Active ingredient / substance name (e.g., 'ibuprofen', 'atorvastatin', 'adalimumab').",
+            "editor": "textfield"
+        },
+        "manufacturer": {
+            "title": "Manufacturer",
+            "type": "string",
+            "description": "Manufacturer or labeler name (e.g., 'Pfizer', 'Johnson & Johnson', 'AbbVie').",
+            "editor": "textfield"
+        },
+        "productType": {
+            "title": "Product Type",
+            "type": "string",
+            "description": "Filter by product type.",
+            "editor": "select",
+            "enum": ["", "HUMAN PRESCRIPTION DRUG", "HUMAN OTC DRUG", "PLASMA DERIVATIVE", "VACCINE", "CELLULAR THERAPY", "STANDARDIZED ALLERGENIC", "NON-STANDARDIZED ALLERGENIC"],
+            "enumTitles": [
+                "All types",
+                "Human Prescription Drug",
+                "Human OTC Drug",
+                "Plasma Derivative",
+                "Vaccine",
+                "Cellular Therapy",
+                "Standardized Allergenic",
+                "Non-Standardized Allergenic"
+            ]
+        },
+        "route": {
+            "title": "Route of Administration",
+            "type": "string",
+            "description": "Filter by route (e.g., 'ORAL', 'INTRAVENOUS', 'TOPICAL', 'SUBCUTANEOUS').",
+            "editor": "textfield"
+        },
+        "maxResults": {
+            "sectionCaption": "Output Settings",
+            "sectionDescription": "Control how many results are returned.",
+            "title": "Max results",
+            "type": "integer",
+            "description": "Maximum number of drug labels to return (1-1000). Free users are limited to 25 per run.",
+            "default": 100,
+            "prefill": 10,
+            "minimum": 1,
+            "maximum": 1000
+        },
+        "requestIntervalSecs": {
+            "sectionCaption": "Advanced Settings",
+            "sectionDescription": "Configure request behavior.",
+            "title": "Request interval (seconds)",
+            "type": "number",
+            "description": "Minimum seconds between requests. Lower is faster but may trigger rate limits.",
+            "default": 0.2,
+            "minimum": 0.1,
+            "maximum": 5
+        },
+        "timeoutSecs": {
+            "title": "HTTP timeout (seconds)",
+            "type": "integer",
+            "description": "Timeout for each HTTP request.",
+            "default": 30,
+            "minimum": 5,
+            "maximum": 120
+        },
+        "maxRetries": {
+            "title": "Max retries",
+            "type": "integer",
+            "description": "Maximum retry attempts on failed or rate-limited requests.",
+            "default": 5,
+            "minimum": 0,
+            "maximum": 10
+        }
+    },
+    "required": ["mode"],
+    "additionalProperties": false
+}
