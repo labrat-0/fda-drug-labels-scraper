@@ -294,6 +294,12 @@ class FDADrugLabelsScraper:
         self, search_query: str
     ) -> AsyncGenerator[dict[str, Any], None]:
         """Paginate through search results."""
+        logger.info(f"Searching with query: '{search_query}'")
+        
+        if not search_query or search_query.strip() == "":
+            logger.warning("Empty search query - no results will be returned")
+            return
+            
         skip = 0
         limit = min(100, self.config.max_results)  # openFDA max per request is 100
         total_yielded = 0

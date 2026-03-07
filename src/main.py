@@ -18,7 +18,9 @@ FREE_TIER_LIMIT = 25
 async def main() -> None:
     async with Actor:
         raw_input = await Actor.get_input() or {}
+        Actor.log.info(f"Raw input received: {raw_input}")
         config = ScraperInput.from_actor_input(raw_input)
+        Actor.log.info(f"Parsed config: mode={config.mode}, query='{config.query}', drug_name='{config.drug_name}'")
 
         validation_error = config.validate_for_mode()
         if validation_error:
