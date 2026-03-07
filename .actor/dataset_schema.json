@@ -105,10 +105,7 @@
             "type": "array",
             "description": "Overdosage info"
         },
-        "description": {
-            "type": "array",
-            "description": "Drug description"
-        },
+
         "clinical_pharmacology": {
             "type": "array",
             "description": "Clinical pharmacology"
