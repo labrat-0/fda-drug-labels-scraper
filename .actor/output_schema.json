@@ -1,5 +1,5 @@
 {
-    "actorOutputSchema": 1,
+    "actorOutputSchemaVersion": 1,
     "properties": {
         "schema_version": {
             "type": "string",
