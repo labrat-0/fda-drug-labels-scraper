@@ -27,6 +27,7 @@
             "type": "string",
             "description": "General search term. Searches across all label fields.",
             "editor": "textfield",
+            "default": "ibuprofen",
             "prefill": "ibuprofen"
         },
         "setId": {
