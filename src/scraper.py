@@ -197,18 +197,17 @@ class FDADrugLabelsScraper:
     async def _search_labels(self) -> AsyncGenerator[dict[str, Any], None]:
         """Search drug labels with various filters."""
         terms: list[tuple[str, str]] = []
+        general_search = None
 
         if self.config.query:
-            # General search across multiple fields
-            terms.append(("_exists_", "set_id"))
+            # General search - just use the query term directly
             query_escaped = self.config.query.replace('"', '\\"')
             if " " in query_escaped:
                 general_search = f'"{query_escaped}"'
             else:
                 general_search = query_escaped
-        else:
-            general_search = None
 
+        # Build additional filter terms
         if self.config.drug_name:
             terms.append(("openfda.brand_name", self.config.drug_name))
         if self.config.active_ingredient:
@@ -220,12 +219,15 @@ class FDADrugLabelsScraper:
         if self.config.route:
             terms.append(("openfda.route", self.config.route))
 
-        if general_search and not terms:
-            search_query = general_search
-        elif general_search and terms:
+        # Construct search query
+        if general_search and terms:
             search_query = f"{general_search}+AND+{self._build_search_query(terms)}"
-        else:
+        elif general_search:
+            search_query = general_search
+        elif terms:
             search_query = self._build_search_query(terms)
+        else:
+            search_query = ""
 
         async for item in self._paginate_search(search_query):
             yield item
