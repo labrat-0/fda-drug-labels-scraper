@@ -1,89 +1,12 @@
 {
     "actorOutputSchemaVersion": 1,
+    "title": "FDA Drug Labels Scraper Results",
+    "description": "Drug label data from FDA openFDA API including brand names, generic names, indications, warnings, and dosage information.",
     "properties": {
-        "schema_version": {
+        "results": {
             "type": "string",
-            "description": "Schema version of the output record"
-        },
-        "type": {
-            "type": "string",
-            "description": "Record type (always 'drug_label')"
-        },
-        "set_id": {
-            "type": "string",
-            "description": "FDA Set ID (unique identifier for the label)"
-        },
-        "id": {
-            "type": "string",
-            "description": "FDA label ID"
-        },
-        "version": {
-            "type": "string",
-            "description": "Label version number"
-        },
-        "effective_time": {
-            "type": "string",
-            "description": "Effective date of the label (YYYYMMDD format)"
-        },
-        "brand_name": {
-            "type": "string",
-            "description": "Brand/trade name of the drug"
-        },
-        "generic_name": {
-            "type": "string",
-            "description": "Generic name of the drug"
-        },
-        "manufacturer_name": {
-            "type": "string",
-            "description": "Manufacturer or labeler name"
-        },
-        "product_type": {
-            "type": "string",
-            "description": "Type of product (e.g., HUMAN PRESCRIPTION DRUG)"
-        },
-        "route": {
-            "type": "array",
-            "description": "Routes of administration"
-        },
-        "substance_name": {
-            "type": "array",
-            "description": "Active ingredient substance names"
-        },
-        "product_ndc": {
-            "type": "array",
-            "description": "Product NDC codes"
-        },
-        "indications_and_usage": {
-            "type": "array",
-            "description": "Indications and usage information"
-        },
-        "dosage_and_administration": {
-            "type": "array",
-            "description": "Dosage and administration instructions"
-        },
-        "contraindications": {
-            "type": "array",
-            "description": "Contraindications"
-        },
-        "warnings_and_cautions": {
-            "type": "array",
-            "description": "Warnings and precautions"
-        },
-        "boxed_warning": {
-            "type": "array",
-            "description": "Black box warnings"
-        },
-        "adverse_reactions": {
-            "type": "array",
-            "description": "Adverse reactions"
-        },
-        "drug_interactions": {
-            "type": "array",
-            "description": "Drug interaction information"
-        },
-        "label_url": {
-            "type": "string",
-            "description": "URL to the full label on DailyMed"
+            "title": "Results",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
         }
     }
 }
