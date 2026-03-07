@@ -1,190 +1,32 @@
 {
     "actorSpecification": 1,
-    "fields": {
-        "schema_version": {
-            "type": "string",
-            "description": "Schema version"
-        },
-        "type": {
-            "type": "string",
-            "description": "Record type"
-        },
-        "set_id": {
-            "type": "string",
-            "description": "FDA Set ID"
-        },
-        "id": {
-            "type": "string",
-            "description": "Label ID"
-        },
-        "version": {
-            "type": "string",
-            "description": "Label version"
-        },
-        "effective_time": {
-            "type": "string",
-            "description": "Effective date"
-        },
-        "brand_name": {
-            "type": "string",
-            "description": "Brand name"
-        },
-        "generic_name": {
-            "type": "string",
-            "description": "Generic name"
-        },
-        "manufacturer_name": {
-            "type": "string",
-            "description": "Manufacturer"
-        },
-        "product_type": {
-            "type": "string",
-            "description": "Product type"
-        },
-        "route": {
-            "type": "array",
-            "description": "Routes of administration"
-        },
-        "substance_name": {
-            "type": "array",
-            "description": "Active ingredients"
-        },
-        "product_ndc": {
-            "type": "array",
-            "description": "Product NDC codes"
-        },
-        "package_ndc": {
-            "type": "array",
-            "description": "Package NDC codes"
-        },
-        "marketing_status": {
-            "type": "string",
-            "description": "Marketing status"
-        },
-        "application_number": {
-            "type": "string",
-            "description": "NDA/ANDA/BLA number"
-        },
-        "indications_and_usage": {
-            "type": "array",
-            "description": "Indications"
-        },
-        "dosage_and_administration": {
-            "type": "array",
-            "description": "Dosage info"
-        },
-        "dosage_forms_and_strengths": {
-            "type": "array",
-            "description": "Dosage forms"
-        },
-        "contraindications": {
-            "type": "array",
-            "description": "Contraindications"
-        },
-        "warnings_and_cautions": {
-            "type": "array",
-            "description": "Warnings"
-        },
-        "warnings": {
-            "type": "array",
-            "description": "Warnings (legacy)"
-        },
-        "boxed_warning": {
-            "type": "array",
-            "description": "Black box warnings"
-        },
-        "adverse_reactions": {
-            "type": "array",
-            "description": "Adverse reactions"
-        },
-        "drug_interactions": {
-            "type": "array",
-            "description": "Drug interactions"
-        },
-        "overdosage": {
-            "type": "array",
-            "description": "Overdosage info"
-        },
-
-        "clinical_pharmacology": {
-            "type": "array",
-            "description": "Clinical pharmacology"
-        },
-        "mechanism_of_action": {
-            "type": "array",
-            "description": "Mechanism of action"
-        },
-        "pharmacodynamics": {
-            "type": "array",
-            "description": "Pharmacodynamics"
-        },
-        "pharmacokinetics": {
-            "type": "array",
-            "description": "Pharmacokinetics"
-        },
-        "pregnancy": {
-            "type": "array",
-            "description": "Pregnancy info"
-        },
-        "pediatric_use": {
-            "type": "array",
-            "description": "Pediatric use"
-        },
-        "geriatric_use": {
-            "type": "array",
-            "description": "Geriatric use"
-        },
-        "how_supplied": {
-            "type": "array",
-            "description": "How supplied"
-        },
-        "storage_and_handling": {
-            "type": "array",
-            "description": "Storage info"
-        },
-        "active_ingredient": {
-            "type": "array",
-            "description": "Active ingredients (OTC)"
-        },
-        "inactive_ingredient": {
-            "type": "array",
-            "description": "Inactive ingredients"
-        },
-        "purpose": {
-            "type": "array",
-            "description": "Purpose (OTC)"
-        },
-        "do_not_use": {
-            "type": "array",
-            "description": "Do not use (OTC)"
-        },
-        "ask_doctor": {
-            "type": "array",
-            "description": "Ask doctor (OTC)"
-        },
-        "stop_use": {
-            "type": "array",
-            "description": "Stop use (OTC)"
-        },
-        "keep_out_of_reach_of_children": {
-            "type": "array",
-            "description": "Keep out of reach"
-        },
-        "controlled_substance": {
-            "type": "array",
-            "description": "Controlled substance info"
-        },
-        "abuse": {
-            "type": "array",
-            "description": "Abuse potential"
-        },
-        "dependence": {
-            "type": "array",
-            "description": "Dependence info"
-        },
-        "label_url": {
-            "type": "string",
-            "description": "DailyMed URL"
+    "fields": {},
+    "views": {
+        "overview": {
+            "title": "Overview",
+            "transformation": {
+                "fields": [
+                    "brand_name",
+                    "generic_name",
+                    "manufacturer_name",
+                    "product_type",
+                    "application_number",
+                    "marketing_status",
+                    "label_url"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "brand_name": { "label": "Brand Name", "format": "text" },
+                    "generic_name": { "label": "Generic Name", "format": "text" },
+                    "manufacturer_name": { "label": "Manufacturer", "format": "text" },
+                    "product_type": { "label": "Product Type", "format": "text" },
+                    "application_number": { "label": "Application #", "format": "text" },
+                    "marketing_status": { "label": "Status", "format": "text" },
+                    "label_url": { "label": "Label URL", "format": "link" }
+                }
+            }
         }
     }
 }
