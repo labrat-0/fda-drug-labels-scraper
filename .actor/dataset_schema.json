@@ -1,5 +1,5 @@
 {
-    "actorDatasetSchema": 1,
+    "actorSpecification": 1,
     "fields": {
         "schema_version": {
             "type": "string",
