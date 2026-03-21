@@ -10,14 +10,96 @@ Search and retrieve structured drug label information from the FDA's openFDA dat
 
 FDA Drug Labels Scraper queries the openFDA Drug Labeling API and returns structured data about FDA-approved drug labels. It extracts labeling sections including indications, dosage, contraindications, warnings, adverse reactions, drug interactions, and pharmacology into clean, normalized JSON. Returns consistent output -- ready for analysis, pharma pipelines, or consumption by AI agents via MCP.
 
-**Use cases:**
+## 👥 Who Uses This
 
-- **Pharma competitive intelligence** -- analyze competitor drug labels, indications, and warnings
-- **Drug safety monitoring** -- track boxed warnings, contraindications, and adverse reactions
-- **Medical research** -- find drugs by indication, ingredient, or mechanism of action
-- **Healthcare applications** -- build drug interaction checkers, dosage guides, or patient info tools
-- **Regulatory compliance** -- monitor label changes and updates
-- **AI agent tooling** -- expose as an MCP tool so AI agents can query drug information in real time
+### 💊 Pharma Competitive Intelligence Teams
+
+You need to know what's on a competitor's label — which indications they've claimed, what warnings they carry, what dosage regimens are approved. FDA drug labels are the ground truth for what a drug is officially approved to do. This actor pulls the full structured label so you can compare across products without manual PDF review.
+
+```json
+{
+    "mode": "search_labels",
+    "query": "GLP-1 obesity",
+    "productType": "HUMAN PRESCRIPTION DRUG",
+    "maxResults": 50
+}
+```
+
+Use the `indications_and_usage`, `warnings_and_precautions`, and `contraindications` fields for head-to-head label comparisons. Combine with FDA Adverse Events for a full safety profile picture.
+
+---
+
+### 🔬 Pharmacovigilance and Drug Safety Teams
+
+You're monitoring boxed warnings, contraindications, and adverse reactions in drug labels — either for your own products or for safety surveillance across a therapeutic area. Label text changes are regulatory events worth tracking.
+
+```json
+{
+    "mode": "search_labels",
+    "query": "metformin",
+    "productType": "HUMAN PRESCRIPTION DRUG",
+    "maxResults": 100
+}
+```
+
+Pull `boxed_warning`, `warnings`, `adverse_reactions`, and `drug_interactions` fields. Schedule runs to detect label updates over time — a new boxed warning or contraindication is a material change for any downstream user of that data.
+
+---
+
+### 🏗️ Healthcare App and Platform Developers
+
+You're building a drug interaction checker, a clinical decision support tool, a patient information app, or a formulary management system. FDA label data is authoritative, public domain, and structured — ideal as a backend data source without licensing fees.
+
+```json
+{
+    "mode": "get_label",
+    "applicationNumber": "NDA021977"
+}
+```
+
+The `drug_interactions`, `dosage_and_administration`, `contraindications`, and `warnings_and_precautions` fields map directly to the display sections most clinical apps need. No licensing, no subscription — FDA data is public domain.
+
+---
+
+### 📋 Regulatory Affairs and Medical Writers
+
+You need to reference competitor labels for regulatory submissions, prepare label comparisons for advisory committees, or track how labels in your therapeutic area evolve over time. Pulling 50 labels by indication keyword takes seconds instead of hours on DailyMed.
+
+```json
+{
+    "mode": "search_labels",
+    "query": "PCSK9 inhibitor hyperlipidemia",
+    "productType": "HUMAN PRESCRIPTION DRUG",
+    "maxResults": 20
+}
+```
+
+Export to CSV for tabular comparison of warnings, contraindications, and dosing across approved products in a class.
+
+---
+
+### 🤖 AI/LLM Engineers and Medical AI Builders
+
+You're grounding a medical AI assistant in authoritative drug information — not hallucinated text, but the actual FDA-approved label. Drug label data as a RAG source or MCP tool gives your agent access to dosing, interactions, and warnings at query time.
+
+**MCP tool config:**
+
+```json
+{
+    "mcpServers": {
+        "fda-drug-labels": {
+            "url": "https://mcp.apify.com?tools=labrat011/fda-drug-labels-scraper",
+            "headers": {
+                "Authorization": "Bearer <APIFY_TOKEN>"
+            }
+        }
+    }
+}
+```
+
+Combine with Clinical Trials Scraper and PubMed Scraper in the same MCP config to give your agent the full FDA + literature + trial data stack.
+
+---
 
 ---
 
@@ -287,6 +369,18 @@ The `drug_interactions` field contains interaction information from the label. S
 ### Is this data official?
 
 Yes. This data comes directly from the FDA's openFDA API, which contains official drug labeling submitted to the FDA. However, labels may not always reflect the most current information -- always verify critical information with official FDA sources.
+
+---
+
+## 🔗 Related Actors
+
+| Actor | What it does | Pairs well when... |
+|-------|-------------|---------------------|
+| [FDA Adverse Events Scraper](https://apify.com/labrat011/fda-adverse-events-scraper) | FAERS post-market safety reports | Cross-reference label warnings with real-world adverse event signals |
+| [FDA Orange Book Scraper](https://apify.com/labrat011/fda-orange-book-scraper) | Patent, exclusivity, and generic data | Check approval and patent status for labeled drugs |
+| [Clinical Trials Scraper](https://apify.com/labrat011/clinical-trials-scraper) | ClinicalTrials.gov study data | Find active trials for drugs or conditions in the label |
+| [PubMed Scraper](https://apify.com/labrat011/pubmed-scraper) | 35M+ biomedical abstracts from NCBI | Find supporting literature for label claims and safety data |
+| [NPI Provider Contact Finder](https://apify.com/labrat011/npi-provider-contact-finder) | Healthcare provider directory | Find prescribers for drugs in a specific therapeutic area |
 
 ---
 
